@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-
+from datetime import date , time
 import logging
 import uvicorn
 logger = logging.getLogger(__name__)
@@ -16,8 +16,8 @@ app.add_middleware(
 
 class QueryModel(BaseModel):
     name: str
-    date: str
-    time: str
+    date: date
+    time: time
 
 class BookAppointmentRequest(BaseModel):
     query: QueryModel
