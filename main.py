@@ -29,6 +29,7 @@ class BookAppointmentRequest(BaseModel):
 async def book_appointment(appointment: BookAppointmentRequest):
     # In a real app, you would save this to a database
     try:
+        print("Appointment booked")
         logger.info({"message": "Appointment is booked", "appointment_details": {
             "name": appointment.query.name,
             "date": appointment.query.date,
@@ -43,6 +44,7 @@ async def book_appointment(appointment: BookAppointmentRequest):
             }
         }
     except Exception as e:
+        print(str(appointment))
         logger.info(str(e))
         raise e
 
