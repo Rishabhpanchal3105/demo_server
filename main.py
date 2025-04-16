@@ -1,11 +1,19 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from datetime import date, time
-import logging
+from fastapi.middleware.cors import CORSMiddleware
 
+import logging
+import uvicorn
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_methods=['*'],
+    allow_origins=['*']
+)
 
 
 class BookAppointmentRequest(BaseModel):
@@ -31,3 +39,6 @@ async def book_appointment(appointment: BookAppointmentRequest):
             "time": appointment.time
         }
     }
+
+if __name__ == "__main__":
+    uvicorn.run(host="0.0.0.0", port=5000)
